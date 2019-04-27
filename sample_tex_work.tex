@@ -1,0 +1,174 @@
+\documentclass[fleqn]{jarticle}
+% 数式の拡張
+\usepackage{amsmath, amssymb}
+\usepackage{mathtools}
+% 図表を描く際に必要
+\usepackage[dvipdfmx]{graphicx}
+\usepackage[dvipdfmx]{color}
+% begin{figure}[H} により強制的に図を好きな位置に配置
+\usepackage{here}
+% 単位のやつ
+\usepackage{siunitx}
+% コメントアウト用
+\usepackage{comment}
+
+
+
+\begin{document}
+
+\title{量子エレクトロニクスレポート1回目 \\ 締切　2018年12月12日}
+\author{大阪大学　工学部電子情報工学科3回生 \\ 量子電子デバイスコース \\ 08D16012 石井智仁 \\ \\ u005062c@ecs.osaka-u.ac.jp}
+\date{2018年12月9日}
+\maketitle
+
+\section{4準位系における反転分布について}
+
+\subsection{レート方程式を記せ}
+
+各準位の原子数をそれぞれ$ N_{0}, N_{1}, N_{2}, N_{3} $ とおくと、各準位におけるレート方程式は
+
+\begin{equation}
+	\label{rate_eqn}
+	\left.
+	\begin{aligned}
+		\dfrac{dN_{1}}{dt}  & = \gamma_{01} N_{0} - \gamma_{10} N_{1} + \gamma_{21} N_{2} + \gamma_{31} N_{3} \\
+		\dfrac{dN_{2}}{dt}  & = -\gamma_{2} N_{2} + \gamma_{32} N_{3} \\
+		\dfrac{dN_{3}}{dt}  & = \varGamma N_{0} - \gamma_{3} N_{3} \\
+		-\dfrac{dN_{0}}{dt}  & = \dfrac{dN_{1}}{dt} + \dfrac{dN_{2}}{dt} + \dfrac{dN_{3}}{dt}
+	\end{aligned}
+	\right\}
+\end{equation}
+ただし $ \gamma_{2} = \gamma_{20} + \gamma_{21}, \gamma_{3} = \gamma_{30} + \gamma_{31} + \gamma_{32} $ とおいた。図\ref{fig:4level}は4準位のエネルギー図である。
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=4cm]{4準位.jpg}
+	\caption{4準位のエネルギー図}
+	\label{fig:4level}
+\end{figure}
+
+\subsection{定常状態における各準位 $(N_{0}, N_{1}, N_{2}, N_{3} )$ を求めよ。このとき準位間隔は熱エネルギより十分大きいものとし、
+準位$i$から$j$に励起ないし緩和する確率を$\gamma_{ij}$, 準位$0$から$3$に励起するポンプレートを$\varGamma$とせよ。}
+
+定常状態において原子の各準位間の励起や緩和のスピードは一定になる。つまり、
+$ \dfrac{dN_{i}}{dt} = 0　 (i=0, 1, 2, 3) $ となるときのレート方程式 $( \ref{rate_eqn} )$ を解くと
+
+\begin{equation}
+	\label{steady_rate_eqn}
+	\left.
+	\begin{aligned}
+		N_{1} & =
+		\left(
+		\dfrac{\gamma_{01}}{\gamma_{10}} + \dfrac{\gamma_{21}\gamma_{32} + \gamma_{2}\gamma_{31}}{\gamma_{10}\gamma_{2}\gamma_{3}}\varGamma
+		\right) N_{0} \\
+		N_{2} & = \dfrac{\gamma_{32}\varGamma}{\gamma_{2}\gamma_{3}}N_{0} \\
+		N_{3} & = \dfrac{\varGamma}{\gamma_{3}}N_{0}
+	\end{aligned}
+	\right\}
+\end{equation}
+となる。 $N_{0} + N_{1} + N_{2} + N_{3} = N$ であるから、$N_{0}$は、
+
+\begin{equation}
+	N_{0} = \dfrac{ \gamma_{01}\gamma_{2}\gamma_{3}N }
+	{ (\gamma_{10} + \gamma_{01})\gamma_{2}\gamma_{3} + \gamma_{32}(\gamma_{21} + \gamma_{10})\varGamma + \gamma_{2}(\gamma_{31} + \gamma_{10})\varGamma }
+\end{equation}
+
+\subsection{反転分布に要するポンプレートを$3$準位系と比較し、議論せよ}
+
+3準位と4準位のポンプレートをそれぞれ $ \varGamma_{3}, \varGamma_{4} $ とおく。4準位レーザーの反転分布が生じる条件は、
+レート方程式 $( \ref{rate_eqn} )$ から$N_2-N_1>0$となるときで、このときポンプレート$\varGamma_4$は、
+
+\begin{equation}
+	\label{4level_inverted}
+	\varGamma_{4} > \dfrac{ \gamma_{01}\gamma_{2}\gamma_{3} }{ \gamma_{32}\gamma_{10} - \gamma_{21}\gamma_{32} - \gamma_{2}\gamma_{31} }
+\end{equation}
+
+準位間隔は熱エネルギより十分大きいものと仮定しているので、 $ \gamma_{01} = \gamma_{10}\exp{ (-W_{1}/k_{B}T) } $ となることがわかる。
+また $ \gamma_{31} < \gamma_{3}, \gamma_{21} < \gamma_{2} $ であるから、 $ \gamma_{10} \gg \gamma_{2} $ ならば、式 $( \ref{4level_inverted} )$ は近似的に
+
+\begin{equation}
+	\label{4level_inverted2}
+	\varGamma_{4} > \dfrac{ \gamma_{01}\gamma_{2}\gamma_{3} }{ \gamma_{32}\gamma_{10} }
+	= \exp{ \left( \dfrac{-W_{1}}{k_{B}T} \right)} \gamma_{2} \left( 1 + \dfrac{\gamma_{31} + \gamma_{30}}{ \gamma_{32}} \right)
+\end{equation}
+一方、3準位レーザーの反転分布の条件は、
+
+\begin{equation}
+	\label{3level_inverted}
+	\varGamma_{3} > \gamma_{21} \left( 1 + \dfrac{ \gamma_{31} }{ \gamma_{32} } \right)
+\end{equation}
+
+式 $( \ref{4level_inverted2} ), ( \ref{3level_inverted} )$ を比較すると $ \exp{ (-W_{1}/k_{B}T) } $ の違いがある。準位1が基底準位0から少なくとも $k_{B}T$ と同程度以上の高いエネルギ―状態にあれば、弱いポンピングで反転分布を作り上げることができる。
+
+\section{$\mathrm{Al_{2}O_{3}}$結晶内に添加された$\mathrm{Cr^{3+}}$イオンの形成する準位について}
+
+\subsection{$\mathrm{Cr^{3+}}$イオンの電子配置を記せ。}
+
+$\mathrm{Cr^{3+}}$イオンの電子配置は、$\mathrm{1s^22s^22p^63s^23p^63d^3}$となっている。
+
+\subsection{$\mathrm{Cr^{3+}}$イオンの$d$軌道$(d_{xy}, d_{yz}, d_{zx}, d_{z^2}, d_{x^2-y^2})$を図示せよ。}
+
+図\ref{fig:spherical_harmonics}は$d$軌道における角運動量の固有関数のグラフである。
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=7cm]{DorbitL.png}
+	\caption{$d$軌道における角運動量の固有関数}
+	\label{fig:spherical_harmonics}
+\end{figure}
+
+\subsection{酸素イオンが八面体の頂点方向から近接してくる様子を上図に書き加え、この結晶場により縮退が解ける理由を述べよ。}
+
+通常、$d$軌道は5重に縮退しているが、金属錯体のように配位子が遷移金属イオンの周りに配位すると、
+配位子による静電場の影響で$d$軌道の縮退が解けることが知られている。
+
+$\mathrm{Cr^{3+}}$イオンと$\mathrm{O^{2-}}$イオンのイオン結合からなる$\mathrm{Cr_2O_3}$の結晶構造は、酸素イオンの八面体の中央にクロムイオンが存在するような構造になっている。
+その構造を図\ref{fig:chromium_oxide}に示す。
+クロムイオンに酸素イオン（配位子）が結合することで、酸素イオンの電子軌道による反発のため、クロムイオンのエネルギーが高くなる軌道$(d_{z^2}, d_{x^2-y^2})$が現れ、縮退が解ける。
+
+$d_{z^2}, d_{x^2-y^2}$軌道は軌道のエネルギーが押し上げられ、2重に縮退した$e_g$軌道となり、
+$d_{xy}, d_{yz}, d_{zx}$軌道は配位子の電子の存在確率が低いため、3重に縮退した$t_{2g}$軌道となる。
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=7cm]{酸化クロム.png}
+	\caption{$\mathrm{Cr_2O_3}$の結晶構造}
+	\label{fig:chromium_oxide}
+\end{figure}
+
+\section{発振波長$1.5\, \si{\micro \metre} $、共振器長$1.0 \, \si{\milli \meter} $、端面反射率$0.5$のファブリペロー共振器型半導体レーザーについて}
+
+\subsection{縦モード発振の線幅を求めよ。}
+
+発振波長$\nu_c = 1.5 \, \si{\micro \metre} $、共振器長$L = 1.0 \, \si{\milli \meter} $、端面反射率$R_1 = R_2 = 0.5$とおくと、
+共振寿命が$T_c = \dfrac{-2L}{c \ln (R_1 R_2)}$であり、縦モード線幅（半値全幅 FWHM）が$\delta\nu_{c} = \dfrac{1}{2\pi T_c} = \dfrac{c \ln (R_1R_2)}{-4 \pi L}$となる。
+
+計算すると、$T_c = 4.8 \times 10^{-12} \, \si{\second}$、$\delta \nu_c = 3.3 \times 10^{10} \, \si{\hertz} $となった。
+
+\subsection{現状の波長多重通信に使用可能であるか、議論せよ。}
+
+このファブリペロー共振器型半導体レーザーのモード間隔$\Delta \nu_c$は、$\Delta \nu_c = \dfrac{c}{2 L} = 1.5 \times 10^{11} \, \si{\hertz} $である。
+波長に換算すると隣り合うチャンネル間隔$\Delta \lambda$がどのようになるか考える。図\ref{fig:freq}に共振器の周波数構造を示す。
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=8cm]{aiueo.png}
+	\caption{共振器の周波数構造}
+	\label{fig:freq}
+\end{figure}\end{document}
+
+レーザーのモード間隔$\Delta \nu_c$とチャンネル間隔$\Delta \lambda$の関係式は、
+
+\begin{equation}
+	\label{delta}
+	\Delta \lambda = - \dfrac{c}{\nu_0^2} \Delta \nu_c
+\end{equation}
+ここで、$\nu_0$は光ファイバ通信に用いられる帯域周波数とする。
+
+一般に光ファイバ通信は波長$1.5 \, \si{\micro \meter}$で損失が小さいことから、
+このときの周波数$\nu_0 = 2.0 \times 10^{14} \, \si{\hertz}$を用いて計算すると、波長における隣り合うチャンネル間隔は$\Delta \lambda = 1.1 \times 10^{-9} \, \si{\meter} = 1.1 \, \si{\nano \meter} > 0.2 \, \si{\nano \meter}$となる。これは光ファイバ通信の要求する基準を満たさないため使用できない。
+
+また縦モード線幅とモード間隔を比較すると、$\delta \nu_c = 3.3 \times 10^{10} < \Delta \nu_c = 1.5 \times 10^{11} \, \si{\hertz}$となり、縦モード線幅がモード間隔に対して
+十分小さくないため、発振スペクトルが緩やかであり、発振器としての基準も満たしていないことがわかる。
+
+\end{document}

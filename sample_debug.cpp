@@ -6,7 +6,6 @@ using namespace std;
 
 int main()
 {
-    printf("Hello World\n");
     printf("printf output\n");
     std::cout << "cout output\n";
 
