@@ -1,5 +1,5 @@
-個人アクセストークン
-edd5302c490f012c78384a8e2af4f129c1759ac5
+personal access token
+906774783e192ca50e5900c02aa0d73e0ee14ebf
 
 gist id
 https://gist.github.com/liquidaqua/2657268ff7249a884025d0c493b6cc7a
