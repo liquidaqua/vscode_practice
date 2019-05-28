@@ -149,6 +149,7 @@ program main
     ! end subroutine
 
     ! サブルーチンと関数(自作手続き)
+<<<<<<< HEAD
     ! g2.f90
 
     ! 配列
@@ -249,3 +250,9 @@ program main
 
 
 end program main
+=======
+    
+
+
+end program main
+>>>>>>> 5935e05581cefb4f1038c550332610f3b3bee654
